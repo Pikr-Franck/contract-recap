@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { AfterViewChecked, Component } from '@angular/core';
 import { ContractSections } from '../models/contract-sections.model';
 import { ContractSectionsComponent } from "../contract-sections/contract-sections.component";
 import { ContractMsgComponent } from "../contract-msg/contract-msg.component";
@@ -11,12 +11,7 @@ import { FormsModule } from '@angular/forms';
     styleUrl: './contract-wrapper.component.scss',
     imports: [ContractSectionsComponent, ContractMsgComponent, FormsModule]
 })
-export class ContractWrapperComponent {
-  constructor() {
-    // this.modifiedDetailId = '';
-    this.modifiedDetailTitle = '';
-  }
-
+export class ContractWrapperComponent implements AfterViewChecked {
   contractDetails: ContractSections[] = [
     {
       "title": "Formule choisie",
@@ -99,25 +94,35 @@ export class ContractWrapperComponent {
     }
   ];
 
-  // public modifiedDetailId: HTMLElement | null;
-  public modifiedDetailTitle: string;
+  public selectedDetail: string = "allDetails";
 
-  // testAlert(detailName: string, detailId: HTMLElement): void {
-  //   console.log(detailName, detailId);
-  //   this.modifiedDetailId = (detailId as HTMLElement);
-  //   this.modifiedDetailTitle = detailName;
-  // }
-  public selectedDetail: string = "all";
+  public modifiedDetailTitle: string = '';
+  public modifiedDetailId: string = '';
+
 
   onChange(selectedValue: any) {
     this.selectedDetail = selectedValue.target.value;
-    console.log("Valeur sélectionnée :", selectedValue.target.value);
-
   }
 
-  testAlert(detailName: string): void {
-    console.log(detailName);
-    // this.modifiedDetailId = (detailId as HTMLElement);
+  getContractDetailByTitle(title: string): ContractSections {
+    const contractDetail = this.contractDetails.find(detail => detail.title === title);
+    if (!contractDetail) {
+      throw new Error(`Contract detail with title '${title}' not found`);
+    }
+    return contractDetail;
+  }
+
+  setSelectedDetail(detailName: string, detailId: any, detailLegend: any): void {
     this.modifiedDetailTitle = detailName;
+    this.modifiedDetailId = detailId;
+    detailLegend.focus();
+  }
+
+  ngAfterViewChecked() {
+    const lastItemBtn: any = document.querySelector("app-contract-sections:last-of-type button");
+    console.log(typeof lastItemBtn, lastItemBtn, "test");
+    if (lastItemBtn) {
+      lastItemBtn.focus();
+    }
   }
 }

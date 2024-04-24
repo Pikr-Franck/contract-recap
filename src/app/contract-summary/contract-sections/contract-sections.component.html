@@ -5,7 +5,7 @@
   </h2>
   <dl>
     @for (detail of contractSection.items; track detail.label) {
-      <dt>{{ detail.label }}</dt>
+      <dt>{{ detail.label }} : </dt>
       @if (detail.url) {
         <dd>
           <a [attr.href]="detail.url">
@@ -18,7 +18,7 @@
     }
   </dl>
   @if (hasModifiedBtn) {
-    <div>
+    <div class="btn-wrapper">
       <button type="button" [attr.aria-label]="'Modifier '+contractSection.title" (click)="btnClick.emit($event)">
         <fa-icon [icon]="['fas', 'pen']"></fa-icon>
         <span>Modifier</span>

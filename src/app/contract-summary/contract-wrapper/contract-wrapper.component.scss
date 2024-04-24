@@ -1,0 +1,54 @@
+@use "sass:map";
+@use "../../../styles/abstract/export.abstracts.scss" as abstract;
+
+article {
+  margin-bottom: 70px;
+  @include abstract.media-min-width(lg) {
+    margin-right: 10px;
+    margin-left: 10px;
+  }
+}
+
+h1 {
+  font-weight: 500;
+  font-size: 2rem;
+  margin: 40px 0;
+}
+
+.wrapper {
+  border-radius: 8px;
+  box-shadow: 0 8px 8px map.get(abstract.$background, 100);
+  overflow: hidden;
+}
+
+header {
+  display: flex;
+  flex-direction: column;
+  background-color: map.get(abstract.$primary, 100);
+  padding: 1rem;
+
+  @include abstract.media-min-width(lg) {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+label {
+  color: map.get(abstract.$foreground, 100);
+  font-weight: 600;
+  padding: .25rem 0;
+}
+
+select {
+  padding: .25rem 0;
+  max-width: 10rem;
+}
+
+footer {
+  display: flex;
+  align-items: center;
+  min-height: 3.125rem;
+  padding-top: 30px;
+}

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-contract-msg',
@@ -8,11 +8,11 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   styleUrl: './contract-msg.component.scss'
 })
 export class ContractMsgComponent {
-  @Input() msgId!: HTMLElement;
+  @Input() msgId!: string;
   @Input() contractSection!: string;
-  @Input() desc!: HTMLElement;
+  @Input() desc!: string;
 
-  returnToItem(elId: HTMLElement):void {
+  returnToItem(elId: any):void {
     elId.focus();
   }
 }

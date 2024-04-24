@@ -1,0 +1,11 @@
+<header>
+  <nav>
+    <ul>
+      @for (link of links; track $index) {
+        <li>
+          <app-internal-link [internLink]="link"></app-internal-link>
+        </li>
+      }
+    </ul>
+  </nav>
+</header>

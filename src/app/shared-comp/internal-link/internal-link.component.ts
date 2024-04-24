@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { InternalLink } from './model/internal-link.model';
 
 @Component({
   selector: 'app-internal-link',
@@ -9,7 +10,5 @@ import { RouterModule } from '@angular/router';
   styleUrl: './internal-link.component.scss'
 })
 export class InternalLinkComponent {
-  @Input() route!: string;
-  @Input() label!: string;
-  @Input() ariaLabel?: string;
+  @Input() internLink!: InternalLink;
 }

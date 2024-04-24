@@ -1,26 +1,60 @@
-<select name="contractSectionFilter" id="contract-section-filter" (change)="onChange($event)">
-  <option value="all">
-    toutes les sections
-  </option>
-  @for (contractDetail of contractDetails; track $index) {
-    <option [attr.value]="contractDetail.title">
-      {{ contractDetail.title }}
-    </option>
-  }
-</select>
+<article>
+  <h1>Récapitulatif du contrat</h1>
 
-@if (selectedDetail === 'all') {
-    @for (contractDetail of contractDetails; track $index) {
-      <app-contract-sections [contractId]="'contract-detail-'+$index" [contractSection]="contractDetail" (btnClick)="testAlert(contractDetail.title)">
+  <div class="wrapper">
+    <header>
+      <label for="contract-section-filter"> Nouveau contrat </label>
+
+      <select
+        name="contractSectionFilter"
+        id="contract-section-filter"
+        (change)="onChange($event)"
+      >
+        <option value="allDetails">toutes les sections</option>
+        @for (contractDetail of contractDetails; track $index) {
+        <option [attr.value]="contractDetail.title" [attr.data-index]="$index">
+          {{ contractDetail.title }}
+        </option>
+        }
+      </select>
+    </header>
+
+    @if (selectedDetail === 'allDetails') {
+      @for (contractDetail of contractDetails; track $index) {
+        <app-contract-sections
+          [contractId]="'contract-detail-' + $index"
+          [contractSection]="contractDetail"
+          (btnClick)="setSelectedDetail(contractDetail.title, contractDetail.title, 'contractDetailStatus')"
+        >
+        </app-contract-sections>
+      }
+    } @else {
+      <app-contract-sections
+        [contractId]="'contract-detail'"
+        [contractSection]="getContractDetailByTitle(selectedDetail)"
+        (btnClick)="
+          setSelectedDetail(
+            getContractDetailByTitle(selectedDetail).title,
+            getContractDetailByTitle(selectedDetail).title,
+            'contractDetailStatus'
+          )
+        "
+      >
       </app-contract-sections>
     }
-  } @else {
-    <app-contract-sections [contractId]="'contract-detail-'" [contractSection]="contractDetail" (btnClick)="testAlert(contractDetail.title)">
-    </app-contract-sections>
-  }
-  <!-- <app-contract-sections [contractId]="'contract-detail-'+$index" [contractSection]="contractDetail" (btnClick)="testAlert(contractDetail.title, 'contract-detail-'+$index)">
-  </app-contract-sections> -->
+  </div>
 
-<!-- @if (modifiedDetailTitle.length > 0) {
-  <app-contract-msg [msgId]="'info'+modifiedDetailId" [contractSection]="modifiedDetailTitle" [desc]="modifiedDetailId"></app-contract-msg>
-} -->
+  <footer>
+    @if (modifiedDetailTitle.length > 0) {
+      <app-contract-msg
+        [msgId]="'contractDetailStatus'"
+        [contractSection]="modifiedDetailTitle"
+        [desc]="modifiedDetailId"
+      ></app-contract-msg>
+    }
+  </footer>
+
+  [
+    [a-z]
+  ]
+</article>

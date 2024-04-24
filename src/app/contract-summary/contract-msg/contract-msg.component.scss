@@ -1,0 +1,11 @@
+@use "sass:map";
+@use "../../../styles/abstract/export.abstracts.scss" as abstract;
+
+p {
+  font-size: 1rem;
+  color: map.get(abstract.$primary, 100);
+}
+
+button {
+  @extend %u-scr-only;
+}

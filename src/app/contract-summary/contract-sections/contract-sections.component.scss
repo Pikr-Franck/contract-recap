@@ -1,0 +1,118 @@
+@use "sass:map";
+@use "../../../styles/abstract/export.abstracts.scss" as abstract;
+
+article {
+  display: grid;
+  grid-template-columns: auto min-content;
+  grid-template-rows: auto auto;
+  grid-template-areas:
+    "title title"
+    "details action"
+  ;
+  padding: 1.5rem 0;
+  margin: 0 2rem;
+
+  :host:not(:last-child) & {
+    border-bottom: 1px solid map.get(abstract.$background, 200);
+  }
+}
+
+h2 {
+  grid-area: title;
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+}
+
+fa-icon {
+  display: inline-block;
+  margin-right: 0.5rem;
+  font-size: 1.5rem;
+  color: map.get(abstract.$primary, 200);
+}
+
+dl {
+  grid-area: details;
+  margin: 0;
+
+  &::after {
+    content: "";
+    display: block;
+    clear: left;
+  }
+}
+
+dd,
+dt {
+  float: left;
+}
+
+dd {
+  margin: 0 0 .5rem 0;
+  padding-left: 0.25rem;
+  font-weight: 600;
+}
+
+dt {
+  clear: left;
+}
+
+a {
+  text-decoration: none; // TODO: warn that link will be invisible for end user
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  &:focus,
+  &:focus-visible {
+    outline-color: map.get(abstract.$primary, 200);
+  }
+}
+
+.btn-wrapper {
+  grid-area: action;
+  align-self: center;
+  padding-left: 1rem;
+  border-left: 1px solid map.get(abstract.$background, 200);
+}
+
+button {
+  display: inline-flex;
+  align-items: center;
+  background-color: rgb(255, 255, 255, 0);
+  color: map.get(abstract.$primary, 100);
+  border-style: none;
+  border-radius: 4px;
+  padding: .25rem .125rem;
+  cursor: pointer;
+  transition: background-color .2s ease-in, color .2s ease-out, outline-color .2s ease-out;
+
+  &:hover {
+    background-color: map.get(abstract.$primary, 100);
+    color: map.get(abstract.$foreground, 100);
+  }
+
+  &:focus,
+  &:focus-visible {
+    outline-color: map.get(abstract.$primary, 200);
+  }
+
+  fa-icon {
+    display: block;
+    border-radius: 99rem;
+    background-color: map.get(abstract.$background, 100);
+    font-size: .625rem;
+    padding: .25rem;
+    line-height: 0.9; // somehow line-height:1 doesn't display the width/height for font-awesome. TODO: investigate this to prevent workaround
+  }
+
+  span {
+    display: none;
+    text-decoration: underline;
+
+    @include abstract.media-min-width(lg) {
+      display: block;
+    }
+  }
+}

@@ -1,0 +1,30 @@
+@use "sass:map";
+@use "./variables" as vars;
+
+%headerFooterCommon {
+  background-color: map.get(vars.$primary, 100);
+  padding: 24px 4rem;
+
+  ul {
+    padding: 0;
+    margin: 0;
+  }
+
+  & li {
+    display: inline-block;
+    list-style-type: none;
+
+    &::before {
+      content: "\200B";
+    }
+  }
+}
+
+%u-scr-only {
+  position: absolute;
+  left: -999rem;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}

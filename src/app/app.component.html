@@ -1,12 +1,7 @@
-<app-icon [widh]="24" [iconId]="iconListEnum.Advantage"></app-icon>
-<app-icon [widh]="24" [iconId]="iconListEnum.CompensationCeiling" [color]="'var(--primary-200)'"></app-icon>
-<app-icon [widh]="24" [iconId]="iconListEnum.ContributionFee"></app-icon>
-<app-icon [widh]="24" [iconId]="iconListEnum.Edit" [color]="'red'"></app-icon>
-<app-icon [widh]="24" [iconId]="iconListEnum.Formula"></app-icon>
-<app-icon [widh]="24" [iconId]="iconListEnum.Reduction"></app-icon>
+<app-header></app-header>
 
-<app-internal-link [label]="'Accueil'" [route]="'./'"></app-internal-link>
+<main>
+  <app-contract-wrapper></app-contract-wrapper>
+</main>
 
-<fa-icon [icon]="['fas', 'pen']"></fa-icon>
-
-<app-contract-wrapper></app-contract-wrapper>
+<app-footer></app-footer>

@@ -1,0 +1,9 @@
+@use "../../styles/abstract/export.abstracts.scss" as abstract;
+
+footer {
+  @extend %headerFooterCommon
+}
+
+ul {
+  text-align: center;
+}
