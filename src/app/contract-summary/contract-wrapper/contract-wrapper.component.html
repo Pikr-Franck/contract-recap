@@ -33,7 +33,7 @@
       }
     } @else {
       <app-contract-sections
-        [contractId]="'contract-detail'"
+        [contractId]="formatString(getContractDetailByTitle(selectedDetail).title)"
         [contractSection]="getContractDetailByTitle(selectedDetail)"
         (btnClick)="
           setSelectedDetail(
