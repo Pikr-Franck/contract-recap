@@ -38,7 +38,7 @@ export class ContractWrapperComponent implements AfterViewChecked {
       "items": [
         {
           "label": "Mobilier",
-          "name": "50 000 €"
+          "name": "50 000 € zut"
         },
         {
           "label": "Bijoux et objets précieux",

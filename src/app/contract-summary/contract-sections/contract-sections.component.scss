@@ -34,6 +34,7 @@ fa-icon {
 dl {
   grid-area: details;
   margin: 0;
+  padding-right: .25rem;
 
   &::after {
     content: "";
@@ -44,13 +45,17 @@ dl {
 
 dd,
 dt {
-  float: left;
+  @include abstract.media-min-width(lg) {
+    float: left;
+  }
 }
 
 dd {
   margin: 0 0 .5rem 0;
-  padding-left: 0.25rem;
   font-weight: 600;
+  @include abstract.media-min-width(lg) {
+    padding-left: 0.25rem;
+  }
 }
 
 dt {
@@ -74,8 +79,12 @@ a {
   grid-area: action;
   display: flex;
   align-items: center;
-  padding-left: 1rem;
+  padding-left: .25rem;
   border-left: 1px solid map.get(abstract.$background, 200);
+
+  @include abstract.media-min-width(lg) {
+    padding-left: 1rem;
+  }
 }
 
 button {
