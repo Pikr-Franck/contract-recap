@@ -3,13 +3,14 @@ import { ContractSections } from '../models/contract-sections.model';
 import { ContractSectionsComponent } from "../contract-sections/contract-sections.component";
 import { ContractMsgComponent } from "../contract-msg/contract-msg.component";
 import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
     selector: 'app-contract-wrapper',
     standalone: true,
     templateUrl: './contract-wrapper.component.html',
     styleUrl: './contract-wrapper.component.scss',
-    imports: [ContractSectionsComponent, ContractMsgComponent, FormsModule]
+    imports: [ContractSectionsComponent, ContractMsgComponent, FormsModule, CommonModule]
 })
 export class ContractWrapperComponent implements AfterViewChecked {
   contractDetails: ContractSections[] = [
@@ -112,17 +113,30 @@ export class ContractWrapperComponent implements AfterViewChecked {
     return contractDetail;
   }
 
-  setSelectedDetail(detailName: string, detailId: any, detailLegend: any): void {
-    this.modifiedDetailTitle = detailName;
+  public detailStatusId: any = 'contractDetailStatus';
+
+  setSelectedDetail(detailId: any, detailName: string): void {
     this.modifiedDetailId = detailId;
-    detailLegend.focus();
+    this.modifiedDetailTitle = detailName;
+    const selectedDetailStatus: any = document.querySelector("#" + this.detailStatusId + " button");
+    if (selectedDetailStatus) {
+      selectedDetailStatus.focus();
+    }
   }
+
+  formatString(input: string): string {
+    const formattedString = input.replace(/[^a-zA-Z]/g, '');
+    const lowercaseString = formattedString.toLowerCase();
+    return lowercaseString;
+  }
+
+  public isFirstLaunched: boolean = true;
 
   ngAfterViewChecked() {
     const lastItemBtn: any = document.querySelector("app-contract-sections:last-of-type button");
-    console.log(typeof lastItemBtn, lastItemBtn, "test");
-    if (lastItemBtn) {
+    if (lastItemBtn && this.isFirstLaunched) {
       lastItemBtn.focus();
+      this.isFirstLaunched = false;
     }
   }
 }

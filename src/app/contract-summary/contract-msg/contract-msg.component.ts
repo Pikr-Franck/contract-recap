@@ -13,6 +13,9 @@ export class ContractMsgComponent {
   @Input() desc!: string;
 
   returnToItem(elId: any):void {
-    elId.focus();
+    const origin : any = document.querySelector("#" + elId + " button");
+    if (origin) {
+      origin.focus();
+    }
   }
 }

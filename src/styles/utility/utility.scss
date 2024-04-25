@@ -1,0 +1,5 @@
+@use "../abstract/export.abstracts.scss" as abstract;
+
+.u-d-n {
+  @extend %u-d-n;
+}

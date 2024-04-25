@@ -72,7 +72,8 @@ a {
 
 .btn-wrapper {
   grid-area: action;
-  align-self: center;
+  display: flex;
+  align-items: center;
   padding-left: 1rem;
   border-left: 1px solid map.get(abstract.$background, 200);
 }

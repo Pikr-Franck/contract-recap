@@ -22,9 +22,12 @@
     @if (selectedDetail === 'allDetails') {
       @for (contractDetail of contractDetails; track $index) {
         <app-contract-sections
-          [contractId]="'contract-detail-' + $index"
+          [contractId]="formatString(contractDetail.title)"
           [contractSection]="contractDetail"
-          (btnClick)="setSelectedDetail(contractDetail.title, contractDetail.title, 'contractDetailStatus')"
+          (btnClick)="setSelectedDetail(
+            formatString(contractDetail.title),
+            contractDetail.title
+          )"
         >
         </app-contract-sections>
       }
@@ -34,9 +37,8 @@
         [contractSection]="getContractDetailByTitle(selectedDetail)"
         (btnClick)="
           setSelectedDetail(
-            getContractDetailByTitle(selectedDetail).title,
-            getContractDetailByTitle(selectedDetail).title,
-            'contractDetailStatus'
+            formatString(getContractDetailByTitle(selectedDetail).title),
+            getContractDetailByTitle(selectedDetail).title
           )
         "
       >
@@ -45,16 +47,11 @@
   </div>
 
   <footer>
-    @if (modifiedDetailTitle.length > 0) {
-      <app-contract-msg
-        [msgId]="'contractDetailStatus'"
-        [contractSection]="modifiedDetailTitle"
-        [desc]="modifiedDetailId"
-      ></app-contract-msg>
-    }
+    <app-contract-msg
+      [ngClass]="modifiedDetailTitle.length > 0 ? '' : 'u-d-n'"
+      [msgId]="detailStatusId"
+      [contractSection]="modifiedDetailTitle"
+      [desc]="modifiedDetailId"
+    ></app-contract-msg>
   </footer>
-
-  [
-    [a-z]
-  ]
 </article>
