@@ -1,0 +1,24 @@
+@use "sass:map";
+@use "../abstract/export.abstracts.scss" as abstract;
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font: 400 .875rem/1.5 sans-serif;
+  color: map.get(abstract.$foreground, 200);
+}
+
+a, select, button {
+  font: inherit;
+  color: inherit;
+}

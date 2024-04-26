@@ -1,0 +1,57 @@
+<article>
+  <h1>Récapitulatif du contrat</h1>
+
+  <div class="wrapper">
+    <header>
+      <label for="contract-section-filter"> Nouveau contrat </label>
+
+      <select
+        name="contractSectionFilter"
+        id="contract-section-filter"
+        (change)="onChange($event)"
+      >
+        <option value="allDetails">toutes les sections</option>
+        @for (contractDetail of contractDetails; track $index) {
+        <option [attr.value]="contractDetail.title" [attr.data-index]="$index">
+          {{ contractDetail.title }}
+        </option>
+        }
+      </select>
+    </header>
+
+    @if (selectedDetail === 'allDetails') {
+      @for (contractDetail of contractDetails; track $index) {
+        <app-contract-sections
+          [contractId]="formatString(contractDetail.title)"
+          [contractSection]="contractDetail"
+          (btnClick)="setSelectedDetail(
+            formatString(contractDetail.title),
+            contractDetail.title
+          )"
+        >
+        </app-contract-sections>
+      }
+    } @else {
+      <app-contract-sections
+        [contractId]="formatString(getContractDetailByTitle(selectedDetail).title)"
+        [contractSection]="getContractDetailByTitle(selectedDetail)"
+        (btnClick)="
+          setSelectedDetail(
+            formatString(getContractDetailByTitle(selectedDetail).title),
+            getContractDetailByTitle(selectedDetail).title
+          )
+        "
+      >
+      </app-contract-sections>
+    }
+  </div>
+
+  <footer>
+    <app-contract-msg
+      [ngClass]="modifiedDetailTitle.length > 0 ? '' : 'u-d-n'"
+      [msgId]="detailStatusId"
+      [contractSection]="modifiedDetailTitle"
+      [desc]="modifiedDetailId"
+    ></app-contract-msg>
+  </footer>
+</article>

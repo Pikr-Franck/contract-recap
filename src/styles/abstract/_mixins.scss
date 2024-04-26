@@ -1,0 +1,26 @@
+@use "sass:map";
+@use "./variables" as vars;
+
+// @mixin media-min-width($bp) {
+//   @each $name, $value in vars.$breakpoints {
+//     @if $name {
+//       @media (min-width: #{$value}) {
+//         @content;
+//       }
+//     } @else {
+//       @error "breakpoint name " $name " does not exist"
+//     }
+//   }
+// };
+
+@mixin media-min-width($key) {
+  $value: map.get(vars.$breakpoints, $key);
+
+  @if map.has-key(vars.$breakpoints, $key) {
+    @media (min-width: $value) {
+      @content;
+    }
+  } @else {
+    @error "key #{$key} doesn't exist in breakpoint map";
+  }
+}

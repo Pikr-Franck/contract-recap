@@ -1,0 +1,28 @@
+<article [attr.id]="contractId">
+  <h2>
+    <fa-icon [icon]="['fas', contractSection.icon]"></fa-icon>
+    {{contractSection.title}}
+  </h2>
+  <dl>
+    @for (detail of contractSection.items; track detail.label) {
+      <dt>{{ detail.label }} : </dt>
+      @if (detail.url) {
+        <dd>
+          <a [attr.href]="detail.url">
+            {{ detail.name }}
+          </a>
+        </dd>
+      } @else {
+        <dd [innerHTML]="detail.name"></dd>
+      }
+    }
+  </dl>
+  @if (hasModifiedBtn) {
+    <div class="btn-wrapper">
+      <button type="button" [attr.aria-label]="'Modifier '+contractSection.title" (click)="btnClick.emit($event)">
+        <fa-icon [icon]="['fas', 'pen']"></fa-icon>
+        <span>Modifier</span>
+      </button>
+    </div>
+  }
+</article>

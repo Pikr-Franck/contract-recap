@@ -1,0 +1,10 @@
+@use "../styles/abstract/export.abstracts.scss" as abstract;
+
+:host main {
+  max-width: 59.875rem;
+  margin: 0 20px;
+
+  @include abstract.media-min-width(lg) {
+    margin: 0 auto;
+  }
+}
