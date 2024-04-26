@@ -1,0 +1,15 @@
+@use "../abstract/variables" as vars;
+
+:root {
+  @each $name, $value in vars.$primary {
+    --primary-#{$name}: #{$value};
+  }
+
+  @each $name, $value in vars.$foreground {
+    --foreground-#{$name}: #{$value};
+  }
+
+  @each $name, $value in vars.$background {
+    --background-#{$name}: #{$value};
+  }
+}
